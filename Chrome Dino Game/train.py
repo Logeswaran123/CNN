@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Aug 24 15:24:45 2019
-
-@author: admin
-"""
+# Train model
 
 import numpy as np
 import cv2
