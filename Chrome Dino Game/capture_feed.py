@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Aug 24 14:24:27 2019
-
-@author: admin
-"""
+# Capture data
 
 import os
 import cv2
