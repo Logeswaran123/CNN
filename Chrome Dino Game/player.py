@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Aug 24 16:27:06 2019
-
-@author: admin
-"""
+# Player model
 
 import selenium
 import cv2
