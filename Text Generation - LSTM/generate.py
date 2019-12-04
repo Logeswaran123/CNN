@@ -1,10 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 22 10:05:15 2019
+# GENERATE
 
-@author: admin
-"""
-
+# import
 import numpy
 from keras.utils import np_utils
 from pickle import load
@@ -12,6 +8,7 @@ from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
 
 
+# define function for generate sequence
 def generate_text(model, tokenizer, max_sequence_len, seed_text, next_words):
     for j in range(next_words):
         token_list = tokenizer.texts_to_sequences([seed_text])[0]
@@ -27,8 +24,9 @@ def generate_text(model, tokenizer, max_sequence_len, seed_text, next_words):
     
     return seed_text
 
+
 # load cleaned text sequences
-filename = 'sop01/soap.txt'
+filename = 'your file name here.txt'
 file = open(filename, 'r')
 # read all text
 text = file.read()
@@ -37,11 +35,14 @@ file.close()
 lines = text.split('\n')
 seq_length = len(lines[0].split()) - 1
 
+
 # load model
-model = load_model('sop01/text_generator.h5')
+model = load_model('your trained model.h5')
+
 
 # load tokenizer
-tokenizer = load(open('sop01/tokenizer.pkl', 'rb'))
+tokenizer = load(open('your generated tokenizer.pkl', 'rb'))
+
 
 # input a seed text
 seed_text = " My experience at " 
