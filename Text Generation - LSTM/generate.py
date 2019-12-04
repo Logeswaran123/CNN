@@ -1,16 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 25 11:39:26 2019
+# GENERATE
 
-@author: admin
-"""
-
+# import
 from pickle import load
 from keras.models import load_model
 from keras.utils import to_categorical
 from keras.preprocessing.sequence import pad_sequences
  
-# generate a sequence of characters with a language model
+
+# define function for generate sequence
 def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 	in_text = seed_text
 	# generate a fixed number of characters
