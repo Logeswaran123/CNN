@@ -9,7 +9,7 @@ from keras.preprocessing.sequence import pad_sequences
 
 
 # define function for generate sequence
-def generate_text(model, tokenizer, max_sequence_len, seed_text, next_words):
+def generate_(model, tokenizer, max_sequence_len, seed_text, next_words):
     for j in range(next_words):
         token_list = tokenizer.texts_to_sequences([seed_text])[0]
         token_list = pad_sequences([token_list], maxlen= max_sequence_len, padding='pre')
@@ -37,16 +37,16 @@ seq_length = len(lines[0].split()) - 1
 
 
 # load model
-model = load_model('your trained model.h5')
+model = load_model('text_generator.h5')
 
 
 # load tokenizer
-tokenizer = load(open('your generated tokenizer.pkl', 'rb'))
+tokenizer = load(open('tokenizer.pkl', 'rb'))
 
 
 # input a seed text
 seed_text = " My experience at " 
 # generate following new text
-generated = generate_text(model, tokenizer, seq_length, seed_text, 50)
-print(generated)
+generated_txt = generate_(model, tokenizer, seq_length, seed_text, 50)
+print(generated_txt)
 
