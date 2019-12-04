@@ -1,4 +1,6 @@
+# TRAIN MODEL - LSTM
 
+#import
 from numpy import array
 from pickle import dump
 from keras.preprocessing.text import Tokenizer
@@ -9,7 +11,8 @@ from keras.layers import LSTM
 from keras.layers import Embedding
 from keras.layers import Dropout
 
-# load doc into memory
+
+# load file
 def load_doc(filename):
 	# open the file as read only
 	file = open(filename, 'r')
@@ -19,10 +22,12 @@ def load_doc(filename):
 	file.close()
 	return text
 
+
 # load the cleaned text
 filename = 'cleaned.txt'
 doc = load_doc(filename)
 lines = doc.split('\n')
+
 
 # integer encode sequences of words
 # declare and fit tokenizer to lines
@@ -32,11 +37,13 @@ sequences = tokenizer.texts_to_sequences(lines)
 # vocab size
 vocab_size = len(tokenizer.word_index) + 1
 
+
 # separate into input and output
 sequences = array(sequences)
 X, y = sequences[:,:-1], sequences[:,-1]
 y = to_categorical(y, num_classes=vocab_size)
 seq_length = X.shape[1]
+
 
 # model
 model = Sequential()
@@ -47,10 +54,13 @@ model.add(Dense(75, activation='relu'))
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 
+
 # compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
 # fit model
 model.fit(X, y, batch_size=60, epochs=10)
+
 
 model.save('text_generator.h5')
 # save the tokenizer
