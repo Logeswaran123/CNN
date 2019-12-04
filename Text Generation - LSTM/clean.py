@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 25 11:48:12 2019
+# LSTM - CLEAN TEXT FILE
 
-@author: admin
-"""
-
+# import
 import string
-
 
 # save tokens to file
 def save_doc(lines, filename):
@@ -14,6 +9,7 @@ def save_doc(lines, filename):
 	file = open(filename, 'w')
 	file.write(data)
 	file.close()
+
 
 # load document
 filename = 'soap.txt'
@@ -23,6 +19,7 @@ doc = file.read()
 # close the file
 file.close()
 print(doc[:200])
+
 
 # clean the document
 # replace '-' & '--' with a space ' '
@@ -40,6 +37,7 @@ tokens = [word.lower() for word in tokens]
 print('TOTAL TOKENS: %d' % len(tokens))
 print('UNIQUE TOKENS: %d' % len(set(tokens)))
 
+
 # organize into sequences of tokens
 length = 50 + 1
 sequences = list()
@@ -51,6 +49,7 @@ for i in range(length, len(tokens)):
 	# store the line
 	sequences.append(line)
 print('TOTAL SEQUENCES: %d' % len(sequences))
+
 
 # save sequences to file
 output_file = 'cleaned.txt'
