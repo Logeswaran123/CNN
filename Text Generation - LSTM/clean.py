@@ -12,7 +12,7 @@ def save_doc(lines, filename):
 
 
 # load document
-filename = 'soap.txt'
+filename = 'your prepared file here.txt'
 file = open(filename, 'r')
 # read all text
 doc = file.read()
