@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Sep 22 15:27:34 2019
-
-@author: admin
-"""
+# MobileNet
 
 import sys, os
 import pandas as pd
@@ -21,16 +16,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.metrics import classification_report, confusion_matrix
 from matplotlib import pyplot as plt
-# pd.set_option('display.max_rows', 500)
-# pd.set_option('display.max_columns', 500)
-# pd.set_option('display.width', 1000)
 
 df=pd.read_csv('fer2013.csv')
 
-# print(df.info())
-# print(df["Usage"].value_counts())
-
-# print(df.head())
 X_train,train_y,X_test,test_y=[],[],[],[]
 
 for index, row in df.iterrows():
@@ -61,8 +49,8 @@ test_y = np.array(test_y,'float32')
 train_y=np_utils.to_categorical(train_y, num_classes=num_labels)
 test_y=np_utils.to_categorical(test_y, num_classes=num_labels)
 
-#cannot produce
-#normalizing data between oand 1
+
+#normalizing data
 X_train -= np.mean(X_train, axis=0)
 X_train /= np.std(X_train, axis=0)
 
@@ -80,18 +68,15 @@ x = Dropout(0.7)(x)
 predictions = Dense(num_labels, activation= 'softmax')(x)
 
 
-#layer_outputs = [layer.output for layer in classifier.layer[:the number of of the architecture ]]
-
-
 model = Model(inputs = base_model.input, outputs = predictions)
 
 
-#Compliling the model
+#Compile model
 model.compile(loss=categorical_crossentropy,
               optimizer=Adam(lr=0.0001),
               metrics=['accuracy'])
 
-#Training the model
+#Train model
 history = model.fit(X_train, train_y,
           batch_size=batch_size,
           epochs=epochs,
@@ -131,7 +116,7 @@ print('Test accuracy:', 100*test_score[1])
 
 model.summary()
 
-#Saving the  model to  use it later on
+# Save model
 fer_json = model.to_json()
 with open("fer.json", "w") as json_file:
     json_file.write(fer_json)
