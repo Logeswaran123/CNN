@@ -50,7 +50,7 @@ train_y=np_utils.to_categorical(train_y, num_classes=num_labels)
 test_y=np_utils.to_categorical(test_y, num_classes=num_labels)
 
 
-#normalizing data
+# Normalize data
 X_train -= np.mean(X_train, axis=0)
 X_train /= np.std(X_train, axis=0)
 
@@ -71,12 +71,12 @@ predictions = Dense(num_labels, activation= 'softmax')(x)
 model = Model(inputs = base_model.input, outputs = predictions)
 
 
-#Compile model
+# Compile model
 model.compile(loss=categorical_crossentropy,
               optimizer=Adam(lr=0.0001),
               metrics=['accuracy'])
 
-#Train model
+# Train model
 history = model.fit(X_train, train_y,
           batch_size=batch_size,
           epochs=epochs,
