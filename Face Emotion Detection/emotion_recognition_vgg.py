@@ -50,7 +50,7 @@ train_y=np_utils.to_categorical(train_y, num_classes=num_labels)
 test_y=np_utils.to_categorical(test_y, num_classes=num_labels)
 
 
-#normalizing data
+# normalize data
 X_train -= np.mean(X_train, axis=0)
 X_train /= np.std(X_train, axis=0)
 
@@ -69,12 +69,12 @@ predictions = Dense(num_labels, activation= 'softmax')(x)
 model = Model(inputs = base_model.input, outputs = predictions)
 
 
-#Compile model
+# Compile model
 model.compile(loss=categorical_crossentropy,
               optimizer=Adam(lr=0.0001),
               metrics=['accuracy'])
 
-#Train model
+# Train model
 history = model.fit(X_train, train_y,
           batch_size=batch_size,
           epochs=epochs,
@@ -114,7 +114,7 @@ print('Test accuracy:', 100*test_score[1])
 
 model.summary()
 
-#Saving the  model to  use it later on
+# Save model
 fer_json = model.to_json()
 with open("fer.json", "w") as json_file:
     json_file.write(fer_json)
