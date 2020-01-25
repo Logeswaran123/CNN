@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 21 16:48:54 2020
-
-@author: admin
-"""
+# SmallVGGNET Architecture
 
 from keras.models import Sequential
 from keras.layers.normalization import BatchNormalization
