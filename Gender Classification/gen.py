@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 21 15:27:23 2020
+# Generate model
 
-@author: admin
-"""
-
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import numpy as np
+import pandas as pd
 import math
 import cv2
 import matplotlib.pyplot as plt
@@ -37,14 +32,14 @@ from smallervggnet import SmallerVGGNet
 
 
 
-# initial parameters
+# Initialize parameters
 epochs = 100
 lr = 1e-3
 batch_size = 64
 
 
 
-
+# Input images
 path = 'utkface_aligned_cropped/UTKFace/UTKFace/'
 files = os.listdir(path)
 print(len(files))
@@ -53,12 +48,14 @@ shuffle(files)
 gender = [i.split('_')[1] for i in files]
 print(len(gender))
 
+# Get class (Man/Woman)
 classes = []
 for i in gender:
     i = int(i)
     classes.append(i)
 print(len(classes))
 
+# Get image data
 X_data =[]
 for file in files:
     print(file)
@@ -69,42 +66,42 @@ for file in files:
 X = np.squeeze(X_data)
 print(X.shape)
 
-# normalize data
+# Normalize data
 X = X.astype('float32')
 X /= 255
 
 print(classes[:10])
 classes = np.array(classes)
 
-# split dataset for training and validation
+# Split dataset for training and validation
 (trainX, testX, trainY, testY) = train_test_split(X, classes, test_size=0.2,
                                                   random_state=42)
 trainY = to_categorical(trainY, num_classes=2)
 testY = to_categorical(testY, num_classes=2)
 
-# augmenting datset 
+# Augment datset 
 aug = ImageDataGenerator(rotation_range=25, width_shift_range=0.1,
                          height_shift_range=0.1, shear_range=0.2, zoom_range=0.2,
                          horizontal_flip=True, fill_mode="nearest")
 
-# build model
+# Build model
 model = SmallerVGGNet.build(width = 96, height = 96, depth = 3,
                             classes = 2)
 
-# compile the model
+# Compile model
 opt = Adam(lr=lr, decay=lr/epochs)
 model.compile(loss="binary_crossentropy", optimizer=opt, metrics=["accuracy"])
 
-# train the model
+# Train model
 H = model.fit_generator(aug.flow(trainX, trainY, batch_size=batch_size),
                         validation_data=(testX,testY),
                         steps_per_epoch=len(trainX) // batch_size,
                         epochs=epochs, verbose=1)
 
-# save the model to disk
+# Save model
 model.save('gender_detection.model')
 
-# plot training/validation loss/accuracy
+# Plot training/validation loss/accuracy
 plt.style.use("ggplot")
 plt.figure()
 N = epochs
@@ -118,7 +115,7 @@ plt.xlabel("Epoch #")
 plt.ylabel("Loss/Accuracy")
 plt.legend(loc="upper right")
 
-# save plot to disk
+# Save plot
 plt.savefig('plot.jpg')
 
 
