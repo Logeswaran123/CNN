@@ -83,7 +83,7 @@ while True:
         cv2.putText(frame, label, (startX, Y),  cv2.FONT_HERSHEY_SIMPLEX,
                     0.7, (0, 255, 0), 2)
     # Display output
-    cv2.imshow("gender detection", frame)
+    cv2.imshow("Output", frame)
     
     # Break if ESC pressed
     if cv2.waitKey(5) & 0xFF == 27:
@@ -93,7 +93,7 @@ while True:
 
 
 # Save output
-#cv2.imwrite("gender_detection.jpg", image)
+#cv2.imwrite("Ouput_file.jpg", image)
 
 video.release()
 cv2.destroyAllWindows()
