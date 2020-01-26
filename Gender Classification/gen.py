@@ -40,7 +40,7 @@ batch_size = 64
 
 
 # Input images
-path = 'utkface_aligned_cropped/UTKFace/UTKFace/'
+path = 'images path'
 files = os.listdir(path)
 print(len(files))
 
@@ -59,7 +59,7 @@ print(len(classes))
 X_data =[]
 for file in files:
     print(file)
-    face = cv2.imread('utkface_aligned_cropped/UTKFace/UTKFace/' +file)
+    face = cv2.imread('images path')
     face = cv2.resize(face, (96, 96))
     X_data.append(face)
 
@@ -111,8 +111,8 @@ plt.plot(np.arange(0,N), H.history["acc"], label="train_acc")
 plt.plot(np.arange(0,N), H.history["val_acc"], label="val_acc")
 
 plt.title("Training Loss and Accuracy")
-plt.xlabel("Epoch #")
-plt.ylabel("Loss/Accuracy")
+plt.xlabel("Epoch")
+plt.ylabel("Loss | Accuracy")
 plt.legend(loc="upper right")
 
 # Save plot
